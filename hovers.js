@@ -108,3 +108,13 @@ function offHoverSettings() {
     
     $("#settings").attr('src', './imagenes//botones/ajustes.png');
 }
+
+function onHoverRegresar() {
+    
+    $("#regresar").attr('src', './imagenes//botones/regresar_h.png');
+}
+
+function offHoverRegresar() {
+    
+    $("#regresar").attr('src', './imagenes//botones/regresar.png');
+}

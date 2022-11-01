@@ -113,8 +113,61 @@ function onHoverRegresar() {
     
     $("#regresar").attr('src', './imagenes//botones/regresar_h.png');
 }
-
+    
 function offHoverRegresar() {
     
     $("#regresar").attr('src', './imagenes//botones/regresar.png');
+}
+
+
+//multijugador
+
+function onHoverPausaMulti() {
+    
+    $("#pausamulti").attr('src', '../imagenes//botones/pausa_h.png');
+}
+
+function offHoverPausaMulti() {
+    
+    $("#pausamulti").attr('src', '../imagenes//botones/pausa.png');
+}
+
+function onHoverRenaudarMulti() {
+    
+    $("#reanudarmulti").attr('src', '../imagenes//botones/reanudar_h.png');
+}
+
+function offHoverRenaudarMulti() {
+    
+    $("#reanudarmulti").attr('src', '../imagenes//botones/reanudar.png');
+}
+
+function onHoverSettingsMulti() {
+    
+    $("#settingsmulti").attr('src', '../imagenes//botones/ajustes_h.png');
+}
+
+function offHoverSettingsMulti() {
+    
+    $("#settingsmulti").attr('src', '../imagenes//botones/ajustes.png');
+}
+
+function onHoverRegresarMulti() {
+    
+    $("#regresarmulti").attrMulti('src', '../imagenes//botones/regresar_h.png');
+}
+    
+function offHoverRegresarMulti() {
+    
+    $("#regresarmulti").attr('src', '../imagenes//botones/regresar.png');
+}
+
+function onHoverSalirMulti() {
+    
+    $("#salirmulti").attr('src', '../imagenes//botones/salir_h.png');
+}
+
+function offHoverSalirMulti() {
+    
+    $("#salirmulti").attr('src', '../imagenes//botones/salir.png');
 }

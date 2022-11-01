@@ -9,9 +9,7 @@
 }
 
 .game-background-start{
-    background-image: url("./imagenes/loading.png");
-    background-size: contain;
-    background-repeat: no-repeat;
+   
     width: 70%;
     height: 90vh;
     margin: 2em 18%;
@@ -43,7 +41,7 @@
     position: absolute;
     text-align: center;
     opacity: 0;
-
+    pointer-events:none;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -63,6 +61,7 @@ padding: 0;
 
 .show_hide {
    
+    pointer-events:all;
     opacity: 1;
   }
 

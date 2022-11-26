@@ -17,6 +17,7 @@
 	<script type="text/javascript" src="game/js/libs/three/FBXLoader.js"></script>
 	<script type="text/javascript" src="game/js/libs/three/OBJLoader.js"></script>
 	<script type="text/javascript" src="game/js/libs/three/inflate.min.js"></script>
+	<script src="player.js"></script>
     <script type="text/javascript">   //CONTENIDO DEL JUEGO
 		var scene;
 		var camera;
@@ -35,6 +36,7 @@
 		var mixers = [];
 		var mixers_2 = [];
 		var persona;
+		const renamon = new Player();
 		$(document).ready(function () {
 
 
@@ -233,17 +235,17 @@
 					box25, box26, box27, box28);
 
 			});
-			loadOBJWithMTL("game/assets/", "jetski.obj", "jetski.mtl", (object) => {
-				object.position.z = 30;
-				object.rotation.x = THREE.Math.degToRad(-90);
-				object.name = "jetski"
+			// loadOBJWithMTL("game/assets/", "jetski.obj", "jetski.mtl", (object) => {
+			// 	object.position.z = 30;
+			// 	object.rotation.x = THREE.Math.degToRad(-90);
+			// 	object.name = "jetski"
 
-				scene.add(object);
-				jet = object;
-				isWorldReady[1] = true;
-			});
+			// 	scene.add(object);
+			// 	jet = object;
+				
+			// });
 
-
+			isWorldReady[1] = true;
 				
 
 			// var loader = new THREE.FBXLoader();
@@ -286,6 +288,9 @@
 			//});
 
 
+			lockJump = false;
+
+			renamon.setModel('Renamon/chr391 with animations.fbx', renamon, 0.0, 0.0, -6);
 
 			render();
 
@@ -322,22 +327,94 @@
 			requestAnimationFrame(render);
 			deltaTime = clock.getDelta();
 
-			var yaw = 0;
-			var forward = 0;
+		var playerMovX = 0;
+		var playerMovY = 0;
+		var playerMovZ = 0;
+
+		if(renamon.beggin){
+			renamon.setIndex(0);
+		}
+		else if(lockJump){
 			if (keys["A"]) {
-				yaw = 5;
-			} else if (keys["D"]) {
-				yaw = -5;
+				playerMovX = -10;
 			}
-			if (keys["W"]) {
-				forward = 20;
-			} else if (keys["S"]) {
-				forward = -20;
+			else if (keys["D"]) {
+				playerMovX = 10;
+			}
+			
+			if(!renamon.getIsJump(0)){
+				lockJump = false;
 			}
 
+			if(!renamon.jumping && !renamon.isJump){
+				renamon.resetAnimation = true;
+				renamon.jumping = true;
+				renamon.isJump = true;
+			}
+			renamon.setIndex(4);
+			
+		}
+		else if(keys["E"]){
+			lockJump = true;
+			
+		}
+		else if(keys["Q"]){
+			if (keys["A"]) {
+				playerMovX = -3;
+				renamon.setIndex(3);
+			}
+			else if (keys["D"]) {
+				playerMovX = 3;
+				renamon.setIndex(3);
+			}
+			else{
+				renamon.setIndex(1);
+			}
+
+		}
+		else{
+			if (keys["A"]) {
+				playerMovX = -10;
+				renamon.setIndex(2);
+			}
+			else if (keys["D"]) {
+				playerMovX = 10;
+				renamon.setIndex(2);
+			}
+			else if (keys["W"]) {
+				playerMovZ = -10;
+				renamon.setIndex(2);
+			}
+			else if (keys["S"]) {
+				playerMovZ = 10;
+				renamon.setIndex(2);
+			}
+			else{
+				renamon.setIndex(1);
+			}
+		}
+		
+		
+
+
+
+
+			// var yaw = 0;
+			// var forward = 0;
+			// if (keys["A"]) {
+			// 	yaw = 5;
+			// } else if (keys["D"]) {
+			// 	yaw = -5;
+			// }
+			// if (keys["W"]) {
+			// 	forward = 20;
+			// } else if (keys["S"]) {
+			// 	forward = -20;
+			// }
+
 			if (isWorldReady[0] && isWorldReady[1]) {
-				jet.rotation.z += yaw * deltaTime;
-				jet.translateY(forward * deltaTime);
+				// jet.rotation.z += yaw * deltaTime;
+				// jet.translateY(forward * deltaTime);
 
 				// Collision
 				/*
@@ -362,9 +439,12 @@
 					}
 				}*/
 
-			
+				renamon.playAnimation(playerMovX, playerMovY, playerMovZ);
+				// camera.position.x = renamon.getPositionx();
+				// camera.position.z = renamon.getPositionz() + 1;
+				// camera.position.y = 15;
 
-				camera.lookAt(jet.position);
+				camera.lookAt(renamon.getPosition());
 			}
 
 
